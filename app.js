@@ -1,14 +1,16 @@
 document.getElementById('picture-btn').addEventListener('click', getPicture);
-// document.getElementById('number-btn').addEventListener('click', getNumberFact);
 document.getElementById('cat-btn').addEventListener('click', getCat);
 document.getElementById('dog-btn').addEventListener('click', getDog);
-
+document.getElementById('random-btn').addEventListener('click', getRandom);
 let output;
 let pod;
 let cat;
+let dog;
+let random;
 
 
 function getPicture(){
+  console.log('getting pod')
   output = '';
   fetch('https://api.nasa.gov/planetary/apod?api_key=QkSnABWDbgQQX0i5NlLaaNpuxARzSeZY07O3JRDl')
     .then(res => res.json())
@@ -96,6 +98,23 @@ function getDog(){
     document.getElementById('output').innerHTML = output;
   })
   .catch(err => console.log(err));
+}
+
+function getRandom(){
+  output = '';
+  fetch('http://www.splashbase.co/api/v1/images/random')
+    .then(res => res.json())
+    .then(data => {
+      random = data;
+      console.log(random);
+      
+      url = random.url;
+      
+      output = `<img src = ${url}>`;
+     
+      document.getElementById('output').innerHTML = output;
+    })
+    .catch(err => console.log(err));
 }
 
 
